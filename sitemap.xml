@@ -16,6 +16,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+  <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/seo.html</loc>
+  <changefreq>weekly</changefreq>
+  <priority>0.6</priority>
+</url>
+  <url>
     <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/pdf-compressor.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
