@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://work-toolkit-pro.github.io/Work-Toolkit-Pro/sitemap.xml
