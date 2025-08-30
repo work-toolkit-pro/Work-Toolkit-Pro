@@ -1823,5 +1823,17 @@ function autoDetectDocument(canvas){
 <script>if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./service-worker.js')
     .catch(console.warn);
-}</script></body>
+}</script><footer>
+  <a href="seo.html" class="hidden-seo">SEO Overview</a> |
+  <a href="sitemap.xml" class="hidden-seo">Sitemap</a> |
+  <a href="robots.txt" class="hidden-seo">Robots.txt</a>
+</footer>
+
+<style>
+.hidden-seo {
+  position: absolute;
+  left: -9999px; /* moves it off-screen */
+}
+</style>
+</body>
 </html>
