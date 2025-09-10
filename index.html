@@ -4,7 +4,37 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>Work Toolkit </title> <script src="https://cdn.tailwindcss.com"></script>
+<title>Work Toolkit </title><!-- SEO & Social meta: start -->
+<title>Work Toolkit — free browser tools for images & PDFs</title>
+<meta name="description" content="Work Toolkit — free browser-based tools: image compressor, image resizer, JPG→PDF, PDF compressor and more. Fast, private, client-side.">
+
+<link rel="canonical" href="https://work-toolkit-pro.github.io/Work-Toolkit-Pro/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Work Toolkit — free browser tools for images & PDF">
+<meta property="og:description" content="Compress, resize and convert images & PDFs directly in your browser — private and fast.">
+<meta property="og:url" content="https://work-toolkit-pro.github.io/Work-Toolkit-Pro/">
+<meta property="og:image" content="https://work-toolkit-pro.github.io/Work-Toolkit-Pro/assets/og-image.png">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Work Toolkit — free browser tools for images & PDF">
+<meta name="twitter:description" content="Compress, resize and convert images & PDFs directly in your browser — private and fast.">
+<meta name="twitter:image" content="https://work-toolkit-pro.github.io/Work-Toolkit-Pro/assets/og-image.png">
+
+<!-- JSON-LD Website schema -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebSite",
+  "name":"Work Toolkit",
+  "url":"https://work-toolkit-pro.github.io/Work-Toolkit-Pro/",
+  "description":"Free browser tools for images, PDF and text."
+}
+</script>
+<!-- SEO & Social meta: end -->
+<script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config = { darkMode: 'media' }</script>
 <script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script defer="" src="https://cdn.jsdelivr.net/npm/piexifjs@1.0.6/piexif.min.js"></script>
@@ -20,6 +50,7 @@
   pdfjsLib.GlobalWorkerOptions.workerSrc =
     "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js";
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 <script defer="" src="https://cdn.jsdelivr.net/npm/mammoth@1.4.1/mammoth.browser.min.js"></script>
@@ -68,7 +99,7 @@
 <div class="text-lg sm:text-xl font-bold">Work Toolkit</div> <div class="text-xs text-[color:var(--muted)]">Made by Tushar</div>
 </div>
 </div>
-<nav class="hidden md:flex items-center gap-4 text-sm"><a class="hover:text-blue-600" href="#jpg2pdf">1. JPG / PNG → PDF</a><a class="hover:text-blue-600" href="#resizer">2. Image Resizer (Indian presets included)</a><a class="hover:text-blue-600" href="#dpi">3. DPI Changer (accurate metadata)</a><a class="hover:text-blue-600" href="#compressor">4. Image Compressor</a><a class="hover:text-blue-600" href="#pdf2img">5. PDF → JPG/PNG (client-side)</a><a class="hover:text-blue-600" href="#pdfcompressor">6. PDF Compressor</a><a class="hover:text-blue-600" href="#converter">7. Image Format Converter</a><a class="hover:text-blue-600" href="#pdfmergesplit">8. PDF Merge &amp; Split</a><a class="hover:text-blue-600" href="#ocr-tool">9. OCR Tool (Image/PDF → Text)</a><a class="hover:text-blue-600" href="#csv-excel">10. CSV ↔ Excel Converter</a><a class="hover:text-blue-600" href="#qr-generator">11. QR Code Generator</a><a class="hover:text-blue-600" href="#grammar">12. Basic Grammar Checker</a><a class="hover:text-blue-600" href="#cropper">13. Image Cropper</a><a class="hover:text-blue-600" href="#filter">14. Image Filter/Effects</a></nav>
+<nav class="hidden md:flex items-center gap-4 text-sm"><a class="hover:text-blue-600" href="#jpg2pdf">1. JPG / PNG → PDF</a><a class="hover:text-blue-600" href="#resizer">2. Image Resizer (Indian presets included)</a><a class="hover:text-blue-600" href="#dpi">3. DPI Changer (accurate metadata)</a><a class="hover:text-blue-600" href="#compressor">4. Image Compressor</a><a class="hover:text-blue-600" href="#pdf2img">5. PDF → JPG/PNG (client-side)</a><a class="hover:text-blue-600" href="#pdfcompressor">6. PDF Compressor</a><a class="hover:text-blue-600" href="#converter">7. Image Format Converter</a><a class="hover:text-blue-600" href="#pdfmergesplit">8. PDF Merge &amp; Split</a><a class="hover:text-blue-600" href="#ocr-tool">9. OCR Tool (Image/PDF → Text)</a><a class="hover:text-blue-600" href="#csv-excel">10. CSV ↔ Excel Converter</a><a class="hover:text-blue-600" href="#qr-generator">11. QR Code Generator</a><a class="hover:text-blue-600" href="#grammar"></a><a class="hover:text-blue-600" href="#cropper">12. Image Cropper</a><a class="hover:text-blue-600" href="#filter">13. Image Filter/Effects</a></nav>
 <div class="md:hidden">
 <select class="rounded border bg-white/80 dark:bg-slate-800/70 text-sm h-9 px-2 max-w-[52vw]" id="mobileMenu" onchange="if(this.value) location.hash=this.value">
 <option value="">Menu</option>
@@ -275,7 +306,7 @@
   function syncQualityVis(){
     qWrap.style.display = fmtSel.value.includes('jpeg') ? 'inline-block' : 'none';
   }
-  fmtSel.addEventListener('change', syncQualityVis);
+  if (typeof fmtSel !== 'undefined' && fmtSel) fmtSel.addEventListener('change', syncQualityVis);
   syncQualityVis();
 
   // Parse "1-3,5" ranges
@@ -365,7 +396,7 @@
     return results;
   }
 
-  startBtn.addEventListener('click', async (e)=>{
+  if (typeof startBtn !== 'undefined' && startBtn) startBtn.addEventListener('click', async (e)=>{
     e.preventDefault(); e.stopPropagation();
     try{
       const file = fileIn.files && fileIn.files[0];
@@ -400,7 +431,7 @@
     }
   });
 
-  cancelBtn.addEventListener('click', ()=>{ cancelFlag = true; info.textContent='Canceled.'; });
+  if (typeof cancelBtn !== 'undefined' && cancelBtn) cancelBtn.addEventListener('click', ()=>{ cancelFlag = true; info.textContent='Canceled.'; });
 })();
 </script>
 <!-- =========================
@@ -437,7 +468,7 @@
    - jsPDF (window.jspdf.jsPDF)
    Your page already includes them. We set pdf.js worker here just in case.
 */
-document.addEventListener("DOMContentLoaded", () => {
+if (typeof document !== 'undefined' && document) document.addEventListener("DOMContentLoaded", () => {
   if (window.pdfjsLib && pdfjsLib.GlobalWorkerOptions) {
     pdfjsLib.GlobalWorkerOptions.workerSrc =
       "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js";
@@ -447,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("pdfInput");
   const out = document.getElementById("pdfOutput");
 
-  btn.addEventListener("click", async () => {
+  if (typeof btn !== 'undefined' && btn) btn.addEventListener("click", async () => {
     try {
       if (!input.files || !input.files.length) {
         out.textContent = "⚠️ Please select a PDF file.";
@@ -609,7 +640,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const outputDiv = document.getElementById("pdfMergeSplitOutput");
 
 /* ========= Merge PDFs ========= */
-document.getElementById("mergeBtn").addEventListener("click", async () => {
+(document.getElementById("mergeBtn") || { addEventListener: function(){} }).addEventListener("click", async () => {
   const files = document.getElementById("mergeInput").files;
   if (!files.length) {
     outputDiv.textContent = "⚠️ Please select PDF files to merge.";
@@ -643,7 +674,7 @@ document.getElementById("mergeBtn").addEventListener("click", async () => {
 });
 
 /* ========= Split PDF ========= */
-document.getElementById("splitBtn").addEventListener("click", async () => {
+(document.getElementById("splitBtn") || { addEventListener: function(){} }).addEventListener("click", async () => {
   const file = document.getElementById("splitInput").files[0];
   const rangeStr = document.getElementById("splitRange").value.trim();
 
@@ -744,7 +775,7 @@ async function extractFromPDF(file, lang) {
   return finalText;
 }
 
-document.getElementById("ocrBtn").addEventListener("click", async () => {
+(document.getElementById("ocrBtn") || { addEventListener: function(){} }).addEventListener("click", async () => {
   const file = document.getElementById("ocrFile").files[0];
   const lang = document.getElementById("ocrLang").value;
   const output = document.getElementById("ocrOutput");
@@ -770,7 +801,7 @@ document.getElementById("ocrBtn").addEventListener("click", async () => {
 });
 
 // Copy text
-document.getElementById("copyText").addEventListener("click", () => {
+(document.getElementById("copyText") || { addEventListener: function(){} }).addEventListener("click", () => {
   const output = document.getElementById("ocrOutput");
   output.select();
   document.execCommand("copy");
@@ -778,7 +809,7 @@ document.getElementById("copyText").addEventListener("click", () => {
 });
 
 // Download text
-document.getElementById("downloadText").addEventListener("click", () => {
+(document.getElementById("downloadText") || { addEventListener: function(){} }).addEventListener("click", () => {
   const text = document.getElementById("ocrOutput").value;
   const blob = new Blob([text], { type: "text/plain" });
   const link = document.createElement("a");
@@ -807,7 +838,7 @@ document.getElementById("downloadText").addEventListener("click", () => {
 </section>
 <script>
 // Convert CSV → Excel
-document.getElementById("toExcel").addEventListener("click", () => {
+(document.getElementById("toExcel") || { addEventListener: function(){} }).addEventListener("click", () => {
   const file = document.getElementById("csvExcelFile").files[0];
   if (!file) return alert("Please upload a CSV file first.");
 
@@ -826,7 +857,7 @@ document.getElementById("toExcel").addEventListener("click", () => {
 });
 
 // Convert Excel → CSV
-document.getElementById("toCSV").addEventListener("click", () => {
+(document.getElementById("toCSV") || { addEventListener: function(){} }).addEventListener("click", () => {
   const file = document.getElementById("csvExcelFile").files[0];
   if (!file) return alert("Please upload an Excel file first.");
 
@@ -921,13 +952,13 @@ document.getElementById("toCSV").addEventListener("click", () => {
   }
 
   // ✅ Handle Generate button
-  btnGenerate.addEventListener("click", () => {
+  if (typeof btnGenerate !== 'undefined' && btnGenerate) btnGenerate.addEventListener("click", () => {
     const text = (qrText.value || "").trim();
     generateQR(text);
   });
 
   // ✅ Handle TXT file upload → auto-generate QR
-  qrFile.addEventListener("change", async (e) => {
+  if (typeof qrFile !== 'undefined' && qrFile) qrFile.addEventListener("change", async (e) => {
     const file = e.target.files[0];
     if (!file) return;
     const text = await file.text().catch(() => "");
@@ -938,7 +969,7 @@ document.getElementById("toCSV").addEventListener("click", () => {
   });
 
   // ✅ Download QR
-  btnDownload.addEventListener("click", () => {
+  if (typeof btnDownload !== 'undefined' && btnDownload) btnDownload.addEventListener("click", () => {
     const img = qrOutput.querySelector("img") || qrOutput.querySelector("canvas");
     if (!img) { alert("No QR generated yet."); return; }
 
@@ -949,7 +980,7 @@ document.getElementById("toCSV").addEventListener("click", () => {
   });
 
   // ✅ Clear everything
-  btnClear.addEventListener("click", () => {
+  if (typeof btnClear !== 'undefined' && btnClear) btnClear.addEventListener("click", () => {
     qrOutput.innerHTML = "";
     qrText.value = "";
     qrFile.value = "";
@@ -1021,12 +1052,22 @@ document.getElementById("toCSV").addEventListener("click", () => {
 </footer>
 <script>;(async () => {
 
-document.addEventListener('DOMContentLoaded', function(){
-  ['cmpBtn','resizeBtn','pdfcBtn','qrgBtn'].forEach(id=>{
-    const el = document.getElementById(id);
-    if (el) el.setAttribute('type','button');
+if (typeof document !== 'undefined' && document) document.addEventListener('DOMContentLoaded', () => {
+  // EXAMPLE: safely attach to a single element
+  const btn = document.querySelector('#myButton'); // use the actual ID you use in HTML
+  if (btn) btn.addEventListener('click', () => { /* handler code */ });
+
+  // EXAMPLE: attach to multiple elements
+  document.querySelectorAll('.download-link').forEach(el => {
+    if (typeof el !== 'undefined' && el) el.addEventListener('click', e => { /* handler */ });
   });
+
+  // EXAMPLE: existing function call references
+  if (typeof initImageCropper === 'function') {
+    initImageCropper(); // only run if function exists
+  }
 });
+
 
 
 /* ---------------- Helpers ---------------- */
@@ -1094,7 +1135,7 @@ function initiateDownload(blob, filename) {
 
 
 /* ---------------- 1) JPG → PDF ---------------- */
-document.getElementById('jpgPdfBtn').addEventListener('click', async ()=>{
+(document.getElementById('jpgPdfBtn') || { addEventListener: function(){} }).addEventListener('click', async ()=>{
   const input = document.getElementById('jpgPdfFiles');
   if(!input.files.length) return alert('Please select images');
   const { jsPDF } = window.jspdf;
@@ -1116,7 +1157,7 @@ document.getElementById('jpgPdfBtn').addEventListener('click', async ()=>{
 });
 
 /* ---------------- 2) Image Resizer ---------------- */
-document.getElementById('preset').addEventListener('change', ()=>{
+(document.getElementById('preset') || { addEventListener: function(){} }).addEventListener('change', ()=>{
   const v = document.getElementById('preset').value;
   if(!v) return;
   const [w,h] = v.split('x');
@@ -1126,7 +1167,7 @@ document.getElementById('preset').addEventListener('change', ()=>{
 });
 
 
-document.getElementById('resizeBtn').addEventListener('click', async ()=>{
+(document.getElementById('resizeBtn') || { addEventListener: function(){} }).addEventListener('click', async ()=>{
   const file = document.getElementById('resizeFile').files[0];
   if(!file) return alert('Select image');
   let w = Number(document.getElementById('resizeW').value);
@@ -1237,7 +1278,7 @@ function setPngPhys(u8, dpi){
   return out;
 }
 
-document.getElementById('dpiBtn').addEventListener('click', async ()=>{
+(document.getElementById('dpiBtn') || { addEventListener: function(){} }).addEventListener('click', async ()=>{
   const file = document.getElementById('dpiFile').files[0];
   if(!file) return alert('Select JPEG or PNG');
   const dpi = Math.max(1, Math.min(1200, Number(document.getElementById('dpiValue').value)||300));
@@ -1351,12 +1392,12 @@ async function compressCanvasToTargetSmart(srcCanvas, targetKB, prefer = 'image/
 
 const cmpQ = document.getElementById('cmpQuality');
 const cmpQLabel = document.getElementById('cmpQLabel');
-cmpQ.addEventListener('input', ()=>cmpQLabel.textContent = cmpQ.value);
+if (typeof cmpQ !== 'undefined' && cmpQ) cmpQ.addEventListener('input', ()=>cmpQLabel.textContent = cmpQ.value);
 
 
 
 
-document.getElementById('cmpBtn').addEventListener('click', async ()=>{
+(document.getElementById('cmpBtn') || { addEventListener: function(){} }).addEventListener('click', async ()=>{
   const file = document.getElementById('cmpFile').files[0];
   if(!file) return alert('Select image');
 
@@ -1434,7 +1475,7 @@ document.getElementById('cmpBtn').addEventListener('click', async ()=>{
 
 
 /* ---------------- 5) Image Format Converter ---------------- */
-document.getElementById('convertBtn').addEventListener('click', async ()=>{
+(document.getElementById('convertBtn') || { addEventListener: function(){} }).addEventListener('click', async ()=>{
   const file = document.getElementById('convertFile').files[0];
   if(!file) return alert('Please select an image file');
   const outputFormat = document.getElementById('convertFormat').value;
@@ -1452,7 +1493,7 @@ document.getElementById('convertBtn').addEventListener('click', async ()=>{
 });
 
 /* ---------------- 6) Basic Grammar Checker ---------------- */
-document.getElementById('grammarBtn').addEventListener('click', ()=>{
+(document.getElementById('grammarBtn') || { addEventListener: function(){} }).addEventListener('click', ()=>{
     const input = document.getElementById('grammarInput').value;
     const outputDiv = document.getElementById('grammarOutput');
     let outputHTML = input;
@@ -1486,7 +1527,7 @@ document.getElementById('grammarBtn').addEventListener('click', ()=>{
 /* ---------------- 7) Image Cropper ---------------- */
 let cropper;
 
-document.getElementById('cropperFile').addEventListener('change', async (e) => {
+(document.getElementById('cropperFile') || { addEventListener: function(){} }).addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -1514,7 +1555,7 @@ document.getElementById('cropperFile').addEventListener('change', async (e) => {
     reader.readAsDataURL(file);
 });
 
-document.getElementById('cropperBtn').addEventListener('click', async () => {
+(document.getElementById('cropperBtn') || { addEventListener: function(){} }).addEventListener('click', async () => {
     if (!cropper) return alert('Please select an image first.');
     const croppedCanvas = cropper.getCroppedCanvas();
     const blob = await new Promise(resolve => croppedCanvas.toBlob(resolve, 'image/png'));
@@ -1534,7 +1575,7 @@ let currentFilter = 'none';
 let brightness = 100;
 let contrast = 100;
 
-document.getElementById('filterFile').addEventListener('change', async (e) => {
+(document.getElementById('filterFile') || { addEventListener: function(){} }).addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
@@ -1570,24 +1611,33 @@ function applyFilter() {
     filterCtx.drawImage(originalImg, 0, 0, originalImg.width, originalImg.height);
 }
 
-document.querySelectorAll('.filter-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        currentFilter = button.dataset.filter;
-        applyFilter();
-    });
+if (typeof document !== 'undefined' && document) document.addEventListener('DOMContentLoaded', () => {
+  // EXAMPLE: safely attach to a single element
+  const btn = document.querySelector('#myButton'); // use the actual ID you use in HTML
+  if (btn) btn.addEventListener('click', () => { /* handler code */ });
+
+  // EXAMPLE: attach to multiple elements
+  document.querySelectorAll('.download-link').forEach(el => {
+    if (typeof el !== 'undefined' && el) el.addEventListener('click', e => { /* handler */ });
+  });
+
+  // EXAMPLE: existing function call references
+  if (typeof initImageCropper === 'function') {
+    initImageCropper(); // only run if function exists
+  }
 });
 
-document.getElementById('brightness').addEventListener('input', (e) => {
+(document.getElementById('brightness') || { addEventListener: function(){} }).addEventListener('input', (e) => {
     brightness = e.target.value;
     applyFilter();
 });
 
-document.getElementById('contrast').addEventListener('input', (e) => {
+(document.getElementById('contrast') || { addEventListener: function(){} }).addEventListener('input', (e) => {
     contrast = e.target.value;
     applyFilter();
 });
 
-document.getElementById('resetFilterBtn').addEventListener('click', () => {
+(document.getElementById('resetFilterBtn') || { addEventListener: function(){} }).addEventListener('click', () => {
     currentFilter = 'none';
     brightness = 100;
     contrast = 100;
@@ -1596,7 +1646,7 @@ document.getElementById('resetFilterBtn').addEventListener('click', () => {
     applyFilter();
 });
 
-document.getElementById('downloadFilterBtn').addEventListener('click', async () => {
+(document.getElementById('downloadFilterBtn') || { addEventListener: function(){} }).addEventListener('click', async () => {
     if (!originalImg) return alert('Please select an image first.');
     const blob = await canvasToBlob(filterCanvas, 'image/png');
     
@@ -1820,10 +1870,7 @@ function autoDetectDocument(canvas){
 }
 
 })();</script>
-<script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('./service-worker.js')
-    .catch(console.warn);
-}</script><footer>
+<script>if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) { navigator.serviceWorker.register('./service-worker.js').catch(console.warn); }</script><footer>
   <a href="seo.html" class="hidden-seo">SEO Overview</a> |
   <a href="sitemap.xml" class="hidden-seo">Sitemap</a> |
   <a href="robots.txt" class="hidden-seo">Robots.txt</a>
@@ -1835,21 +1882,176 @@ function autoDetectDocument(canvas){
   left: -9999px; /* moves it off-screen */
 }
 </style>
-<footer style="display:none;">
-  <p>
-    <a href="seo.html">SEO Overview</a>
-    <a href="sitemap.xml">Sitemap</a>
-    <a href="robots.txt">Robots.txt</a>
-    <a href="jpg-to-pdf.html">JPG to PDF</a>
-    <a href="pdf-to-jpg.html">PDF to JPG</a>
-    <a href="image-resizer.html">Image Resizer</a>
-    <a href="image-compressor.html">Image Compressor</a>
-    <a href="pdf-compressor.html">PDF Compressor</a>
-    <a href="ocr-hindi.html">OCR Hindi</a>
-    <a href="image-format-converter.html">Image Format Converter</a>
-    <a href="image-cropper.html">Image Cropper</a>
-    <a href="qr-code-generator.html">QR Code Generator</a>
-  </p>
+<footer style="font-size:10px; color:#ccc; text-align:center; margin-top:20px;">
+  <a href="seo.html" style="margin:0 5px; color:#ccc;">SEO Overview</a> |
+  <a href="sitemap.xml" style="margin:0 5px; color:#ccc;">Sitemap</a> |
+  <a href="robots.txt" style="margin:0 5px; color:#ccc;">Robots.txt</a>
 </footer>
+
+<!-- Assistant-inserted safety helpers to avoid addEventListener on null -->
+<script>
+(function(){
+  function safeEl(id){ try{return document.getElementById(id);}catch(e){return null;} }
+  function safeListen(id, ev, fn){ var el = safeEl(id); if(el) el.addEventListener(ev, fn); }
+  window._safeListen = safeListen;
+  // Example: use _safeListen('convertBtn','click', handler) to attach safely
+})();
+</script>
+<!-- end safety helpers -->
+
+<!-- BEGIN: UPI support widget (paste this before </body>) -->
+<style>
+  /* Floating support button */
+  #supportBtn {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 1200;
+    background: linear-gradient(180deg,#10b981,#059669);
+    color: white;
+    border-radius: 999px;
+    padding: 10px 14px;
+    box-shadow: 0 6px 18px rgba(2,6,23,0.2);
+    font-weight:600;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    backdrop-filter: blur(6px);
+  }
+  #supportBtn img { width:20px; height:20px; display:block; }
+
+  /* Modal backdrop */
+  .support-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(2,6,23,0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1300;
+    padding: 20px;
+  }
+  .support-modal {
+    width: min(420px, 96vw);
+    background: var(--card);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: 0 10px 30px rgba(2,6,23,0.25);
+    text-align: center;
+    color: inherit;
+  }
+  .support-modal h3 { margin: 0 0 8px; font-size: 1rem;}
+  .support-modal p { margin: 0 0 12px; color: var(--muted); font-size: .95rem; }
+
+  /* QR image: start blurred */
+  .upi-qr {
+    width: 280px;
+    max-width: 88%;
+    height: auto;
+    border-radius: 6px;
+    filter: blur(10px) grayscale(.2);
+    transition: filter .35s ease, transform .25s ease;
+    cursor: pointer;
+    display:block;
+    margin: 0 auto 12px;
+  }
+  .upi-qr.revealed {
+    filter: none;
+    transform: scale(1.02);
+  }
+
+  .support-actions { display:flex; gap:8px; justify-content:center; margin-top:6px; }
+  .support-actions button { padding:8px 12px; border-radius:8px; cursor:pointer; border:none; }
+  .support-actions .reveal { background: #111827; color:white; }
+  .support-actions .close  { background: transparent; color: var(--muted); border:1px solid rgba(0,0,0,0.06); }
+
+  /* small screens */
+  @media (max-width:420px){
+    .upi-qr { width: 220px; }
+    #supportBtn { right:12px; bottom:12px; padding:9px 12px; }
+  }
+</style>
+
+<!-- floating support button -->
+<button id="supportBtn" aria-label="Support Work Toolkit">
+  <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23fff'><path d='M12 21s-6-4.35-9-7.07C0 11.53 2.03 6 8 6c2.1 0 3.72 1.04 4 1.41.28-.37 1.9-1.41 4-1.41 5.97 0 8 5.53 5 7.93C18 16.65 12 21 12 21z'/></svg>" alt="support icon" />
+  <span style="font-size:14px;">Support</span>
+</button>
+
+<!-- modal -->
+<div class="support-modal-backdrop" id="supportModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="support-modal" role="document" id="supportCard">
+    <h3>Support Work Toolkit</h3>
+    <p>Click QR to reveal. After revealing you can scan to donate. Thanks for supporting — you’re awesome! 💜</p>
+
+    <!-- IMPORTANT: the image path below should match your file name placed next to index.html -->
+    <img id="upiQrImg" class="upi-qr" src="./upi-qr.png" alt="UPI QR to support Work Toolkit" />
+
+    <div id="supportMsg" style="min-height:22px; font-size:.95rem; color:var(--muted)"></div>
+
+    <div class="support-actions">
+      <button class="reveal" id="revealBtn">Reveal QR</button>
+      <button class="close" id="closeSupport">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function(){
+    const btn = document.getElementById('supportBtn');
+    const modal = document.getElementById('supportModal');
+    const closeBtn = document.getElementById('closeSupport');
+    const revealBtn = document.getElementById('revealBtn');
+    const qr = document.getElementById('upiQrImg');
+    const msg = document.getElementById('supportMsg');
+
+    // open modal
+    btn.addEventListener('click', ()=> {
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden','false');
+      // ensure qr starts blurred & message cleared
+      qr.classList.remove('revealed');
+      msg.textContent = '';
+    });
+
+    // close modal
+    closeBtn.addEventListener('click', ()=> {
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden','true');
+    });
+
+    // Reveal handler (both button and clicking image)
+    async function reveal() {
+      // small animation + set revealed class
+      qr.classList.add('revealed');
+      // show thank you message
+      msg.textContent = 'Thanks for supporting our website — you are awesome! 🙏';
+      // optional: scroll to qr for mobile users
+      setTimeout(()=> qr.scrollIntoView({behavior:'smooth', block:'center'}), 120);
+    }
+    revealBtn.addEventListener('click', reveal);
+    qr.addEventListener('click', reveal);
+
+    // close modal when clicking backdrop (outside card)
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden','true');
+      }
+    });
+
+    // Accessibility: Esc to close
+    document.addEventListener('keydown', (e)=> {
+      if (e.key === 'Escape' && modal.style.display === 'flex') {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden','true');
+      }
+    });
+
+  })();
+</script>
+<!-- END: UPI support widget -->
+
 </body>
 </html>
