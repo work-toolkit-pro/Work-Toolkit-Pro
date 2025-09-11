@@ -1,25 +1,20 @@
 {
   "name": "Work Toolkit",
   "short_name": "WorkToolkit",
+  "description": "Work Toolkit — client-side image, PDF & text utilities",
   "start_url": "./index.html",
-  "scope": "./",
   "display": "standalone",
-  "background_color": "#0b1220",
-  "theme_color": "#2563eb",
-  "description": "Work Toolkit \u2014 client-side image and PDF utilities (compress, convert, OCR, and more).",
+  "scope": "./",
+  "background_color": "#ffffff",
+  "theme_color": "#0b5df2",
   "icons": [
     {
-      "src": "icons/icon-192.png",
+      "src": "./icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icons/icon-256.png",
-      "sizes": "256x256",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/icon-512.png",
+      "src": "./icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

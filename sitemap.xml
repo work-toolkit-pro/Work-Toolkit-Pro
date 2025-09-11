@@ -1,62 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Homepage -->
   <url>
     <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- Main Index -->
   <url>
     <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/index.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
-  <!-- SEO Pages -->
   <url>
-    <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/jpg-to-pdf.html</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/image-resizer.html</loc>
+    <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/seo.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.3</priority>
   </url>
-
-  <url>
-    <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/image-compressor.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/pdf-compressor.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/grammar-checker.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/ocr-hindi.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-  <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/seo.html</loc>
-  <changefreq>weekly</changefreq>
-  <priority>0.8</priority>
-</url>
-
-
+  <!-- Add other pages as needed -->
 </urlset>
