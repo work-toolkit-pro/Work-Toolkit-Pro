@@ -1,97 +1,52 @@
-// service-worker.js
-const CACHE_NAME = 'work-toolkit-cache-v1';
+// Service worker with safe response cloning to avoid "Response body is already used" errors.
+const CACHE_NAME = 'wtp-cache-v1';
 const PRECACHE_URLS = [
-  './',
-  './index.html',
-  './index.css',      // if you have site css file, or remove
-  './manifest.json',
-  // add other essential resource paths here (images, icons, etc)
+  '/', '/index.html', '/seo.html', '/image-compressor.html', '/image-resizer.html',
+  '/jpg-to-pdf.html', '/pdf-compressor.html', '/ocr-hindi.html', '/robots.txt', '/sitemap.xml', '/manifest.json'
 ];
 
-// Install - pre-cache static resources
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
+  self.skipWaiting();
   event.waitUntil(
-    (async () => {
-      const cache = await caches.open(CACHE_NAME);
-      try {
-        await cache.addAll(PRECACHE_URLS);
-      } catch (err) {
-        // If a resource fails to cache it won't break install, log to console
-        console.warn('ServiceWorker precache failed:', err);
-      }
-      await self.skipWaiting();
-    })()
+    caches.open(CACHE_NAME).then(cache => cache.addAll(PRECACHE_URLS))
   );
 });
 
-// Activate - cleanup old caches
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    (async () => {
-      const keys = await caches.keys();
-      await Promise.all(
-        keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
-      );
-      await self.clients.claim();
-    })()
-  );
+self.addEventListener('activate', event => {
+  event.waitUntil(clients.claim());
 });
 
-// Fetch - cache-first then network, and ensure Response cloning is handled
-self.addEventListener('fetch', (event) => {
+// Fetch handler: tries cache first, falls back to network and caches a clone of the response.
+self.addEventListener('fetch', event => {
   const req = event.request;
 
-  // only handle GET requests
+  // Only handle GET requests (don't try to cache form posts etc.)
   if (req.method !== 'GET') return;
 
-  event.respondWith((async () => {
-    const cache = await caches.open(CACHE_NAME);
+  event.respondWith(
+    caches.match(req).then(cachedResponse => {
+      // If we have a cached response, return it immediately but also update cache in background
+      const networkFetch = fetch(req).then(networkResponse => {
+        // If invalid response, just return it
+        if (!networkResponse || networkResponse.status !== 200) return networkResponse;
 
-    // Try cache first
-    const cached = await cache.match(req);
-    if (cached) {
-      // Kick off a network update in the background (stale-while-revalidate)
-      event.waitUntil((async () => {
-        try {
-          const networkResp = await fetch(req);
-          // clone before putting in cache or reading
-          if (networkResp && networkResp.ok) {
-            await cache.put(req, networkResp.clone());
-          }
-        } catch (e) {
-          // ignore network errors
-        }
-      })());
-      return cached;
-    }
+        // Clone for caching: clone() returns a fresh stream for the cache while we return the original.
+        const responseClone = networkResponse.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(req, responseClone).catch(() => {/* put may fail on opaque responses */});
+        });
+        return networkResponse;
+      }).catch(() => cachedResponse || new Response(null, { status: 404 }));
 
-    // Fallback to network
-    try {
-      const response = await fetch(req);
-      // Make sure we have a clone before we consume the response
-      const responseClone = response.clone();
+      // Return cached if present, otherwise wait for network
+      return cachedResponse || networkFetch;
+    })
+  );
+});
 
-      // Put clone in cache asynchronously
-      event.waitUntil((async () => {
-        try {
-          if (responseClone && responseClone.ok) {
-            const c = await caches.open(CACHE_NAME);
-            await c.put(req, responseClone);
-          }
-        } catch (e) {
-          // caching failed — don't throw to the user
-          console.warn('ServiceWorker cache put failed:', e);
-        }
-      })());
-
-      // Return original response to the page
-      return response;
-    } catch (err) {
-      // Network failed — try to return something from cache (offline fallback)
-      const fallback = await cache.match('./'); // maybe index
-      if (fallback) return fallback;
-      // Final fallback: create a simple Response
-      return new Response('Offline', { status: 503, statusText: 'Offline' });
-    }
-  })());
+// Listen for skipWaiting from page to immediately activate new SW if posted
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
