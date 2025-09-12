@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/</loc>
     <changefreq>weekly</changefreq>
@@ -13,7 +13,6 @@
   <url>
     <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/seo.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.3</priority>
+    <priority>0.5</priority>
   </url>
-  <!-- Add other pages as needed -->
 </urlset>

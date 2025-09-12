@@ -1,14 +1,23 @@
-{ 
+{
   "name": "Work Toolkit Pro",
-  "short_name": "WT Toolkit",
-  "description": "A small collection of privacy-first browser tools (image, pdf, and seo helpers)",
-  "start_url": "/Work-Toolkit-Pro/",
-  "scope": "/Work-Toolkit-Pro/",
+  "short_name": "WorkToolkit",
+  "description": "Collection of small utilities — image tools, PDF tools, converters.",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#ffffff",
-  "theme_color": "#0f1724",
+  "theme_color": "#2563eb",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ]
 }
