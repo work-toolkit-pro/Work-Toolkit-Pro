@@ -21,6 +21,18 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  
+<url>
+<loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/privacy.html</loc>
+<lastmod>2025-09-15</lastmod>
+<priority>0.6</priority>
+</url> 
+
+<url>
+<loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/terms.html</loc>
+<lastmod>2025-09-15</lastmod>
+<priority>0.6</priority>
+</url>
 
   <url>
     <loc>https://work-toolkit-pro.github.io/Work-Toolkit-Pro/image-resizer.html</loc>
