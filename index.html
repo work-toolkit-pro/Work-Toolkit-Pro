@@ -4,6 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Work Toolkit </title><!-- SEO & Social meta: start -->
 <title>Work Toolkit — free browser tools for images & PDFs</title>
 <meta name="description" content="Work Toolkit — free browser-based tools: image compressor, image resizer, JPG→PDF, PDF compressor and more. Fast, private, client-side.">
 
@@ -32,6 +33,17 @@
   "description":"Free browser tools for images, PDF and text."
 }
 </script>
+<!-- SEO & Social meta: end -->
+
+<!-- Global site tag (gtag.js) - Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JZGVQQHFHB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-JZGVQQHFHB', { 'send_page_view': true });
+</script>
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config = { darkMode: 'media' }</script>
 <script defer="" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -89,27 +101,14 @@
 </style>
 <link rel="manifest" href="./manifest.json">
 <link rel="icon" href="./favicon.ico" type="image/x-icon">
-<meta name="theme-color" content="#2563eb"> <meta content="#2563eb" name="theme-color"/>
-<link rel="sitemap" type="application/xml" title="Sitemap" href="/Work-Toolkit-Pro/sitemap.xml">
-<style>
-.sr-only {
-  position: absolute !important;
-  height: 1px; width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  white-space: nowrap;
-  border: 0; padding: 0; margin: -1px;
-}
-</style>
-
-</head>
+<meta name="theme-color" content="#2563eb"> <meta content="#2563eb" name="theme-color"/></head>
 <body class="bg-[color:var(--bg)] text-slate-900 dark:text-slate-100">
 <header class="sticky top-0 z-30 bg-white/80 dark:bg-slate-900/80 backdrop-blur border-b border-slate-200 dark:border-slate-800">
 <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
 <div class="flex items-center gap-3">
 <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 grid place-items-center font-bold">WT</div>
 <div>
-<div class="text-lg sm:text-xl font-bold">Work Toolkit</div> <div class="text-xs text-[color:var(--muted)]">Made by Tushar</div>
+<div class="text-lg sm:text-xl font-bold">Work Toolkit</div> <div class="text-xs text-[color:var(--muted)]">100% FREE TOOLS</div>
 </div>
 </div>
 <nav class="hidden md:flex items-center gap-4 text-sm"><a class="hover:text-blue-600" href="#jpg2pdf">1. JPG / PNG → PDF</a><a class="hover:text-blue-600" href="#resizer">2. Image Resizer (Indian presets included)</a><a class="hover:text-blue-600" href="#dpi">3. DPI Changer (accurate metadata)</a><a class="hover:text-blue-600" href="#compressor">4. Image Compressor</a><a class="hover:text-blue-600" href="#pdf2img">5. PDF → JPG/PNG (client-side)</a><a class="hover:text-blue-600" href="#pdfcompressor">6. PDF Compressor</a><a class="hover:text-blue-600" href="#converter">7. Image Format Converter</a><a class="hover:text-blue-600" href="#pdfmergesplit">8. PDF Merge &amp; Split</a><a class="hover:text-blue-600" href="#ocr-tool">9. OCR Tool (Image/PDF → Text)</a><a class="hover:text-blue-600" href="#csv-excel">10. CSV ↔ Excel Converter</a><a class="hover:text-blue-600" href="#qr-generator">11. QR Code Generator</a><a class="hover:text-blue-600" href="#grammar"></a><a class="hover:text-blue-600" href="#cropper">12. Image Cropper</a><a class="hover:text-blue-600" href="#filter">13. Image Filter/Effects</a></nav>
@@ -1081,6 +1080,8 @@ if (typeof document !== 'undefined' && document) document.addEventListener('DOMC
   }
 });
 
+
+
 /* ---------------- Helpers ---------------- */
 const fileToImage = (file)=>new Promise((res,rej)=>{ const img = new Image(); img.onload=()=>res(img); img.onerror=rej; img.src = URL.createObjectURL(file); });
 const canvasToBlob = (canvas, type='image/png', q=0.92)=>new Promise(r=>canvas.toBlob(r,type,q));
@@ -1144,6 +1145,7 @@ function initiateDownload(blob, filename) {
     a.click();
 }
 
+
 /* ---------------- 1) JPG → PDF ---------------- */
 (document.getElementById('jpgPdfBtn') || { addEventListener: function(){} }).addEventListener('click', async ()=>{
   const input = document.getElementById('jpgPdfFiles');
@@ -1175,6 +1177,7 @@ function initiateDownload(blob, filename) {
   document.getElementById('resizeH').value = h;
   document.getElementById('resizeUnit').value = 'px';
 });
+
 
 (document.getElementById('resizeBtn') || { addEventListener: function(){} }).addEventListener('click', async ()=>{
   const file = document.getElementById('resizeFile').files[0];
@@ -1308,7 +1311,7 @@ function setPngPhys(u8, dpi){
   if(wantPNG){
     u8 = setPngPhys(u8, dpi);
     const outBlob = new Blob([u8], { type: 'image/png' });
-
+    
     showDownloadAlert(file, outBlob);
     initiateDownload(outBlob, `dpi_${dpi}.png`);
     document.getElementById('dpiInfo').textContent = `Wrote ${dpi} DPI into PNG pHYs.`;
@@ -1327,7 +1330,7 @@ function setPngPhys(u8, dpi){
       const arr = new Uint8Array(bin.length);
       for(let i=0;i<bin.length;i++) arr[i] = bin.charCodeAt(i);
       const outBlob = new Blob([arr], { type: 'image/jpeg' });
-
+      
       showDownloadAlert(file, outBlob);
       initiateDownload(outBlob, `dpi_${dpi}.jpg`);
       document.getElementById('dpiInfo').textContent = `Wrote ${dpi} DPI into JPEG JFIF + EXIF.`;
@@ -1402,6 +1405,9 @@ async function compressCanvasToTargetSmart(srcCanvas, targetKB, prefer = 'image/
 const cmpQ = document.getElementById('cmpQuality');
 const cmpQLabel = document.getElementById('cmpQLabel');
 if (typeof cmpQ !== 'undefined' && cmpQ) cmpQ.addEventListener('input', ()=>cmpQLabel.textContent = cmpQ.value);
+
+
+
 
 (document.getElementById('cmpBtn') || { addEventListener: function(){} }).addEventListener('click', async ()=>{
   const file = document.getElementById('cmpFile').files[0];
@@ -1478,6 +1484,8 @@ if (typeof cmpQ !== 'undefined' && cmpQ) cmpQ.addEventListener('input', ()=>cmpQ
   }
 });
 
+
+
 /* ---------------- 5) Image Format Converter ---------------- */
 (document.getElementById('convertBtn') || { addEventListener: function(){} }).addEventListener('click', async ()=>{
   const file = document.getElementById('convertFile').files[0];
@@ -1490,7 +1498,7 @@ if (typeof cmpQ !== 'undefined' && cmpQ) cmpQ.addEventListener('input', ()=>cmpQ
   const ctx = canvas.getContext('2d');
   ctx.drawImage(img, 0, 0, img.width, img.height);
   const blob = await canvasToBlob(canvas, outputFormat, 0.95);
-
+  
   showDownloadAlert(file, blob);
   initiateDownload(blob, `converted.${outputFormat.split('/')[1]}`);
   document.getElementById('convertInfo').textContent = `Image converted to ${outputFormat.split('/')[1].toUpperCase()} and downloaded.`;
@@ -1563,7 +1571,7 @@ let cropper;
     if (!cropper) return alert('Please select an image first.');
     const croppedCanvas = cropper.getCroppedCanvas();
     const blob = await new Promise(resolve => croppedCanvas.toBlob(resolve, 'image/png'));
-
+    
     const file = document.getElementById('cropperFile').files[0];
     showDownloadAlert(file, blob);
     initiateDownload(blob, 'cropped_image.png');
@@ -1595,7 +1603,7 @@ let contrast = 100;
     previewContainer.classList.remove('hidden');
     controls.classList.remove('hidden');
     filterInfo.textContent = 'Image loaded. Apply filters and effects.';
-
+    
     currentFilter = 'none';
     brightness = 100;
     contrast = 100;
@@ -1653,13 +1661,15 @@ if (typeof document !== 'undefined' && document) document.addEventListener('DOMC
 (document.getElementById('downloadFilterBtn') || { addEventListener: function(){} }).addEventListener('click', async () => {
     if (!originalImg) return alert('Please select an image first.');
     const blob = await canvasToBlob(filterCanvas, 'image/png');
-
+    
     const file = document.getElementById('filterFile').files[0];
     showDownloadAlert(file, blob);
     initiateDownload(blob, `filtered_image.png`);
-
+    
     document.getElementById('filterInfo').textContent = 'Filtered image downloaded successfully.';
 });
+
+
 
 function grayscaleInPlace(canvas){
   const ctx = canvas.getContext('2d', { willReadFrequently: true });
@@ -1812,6 +1822,7 @@ async function compressToTargetDoc(workCanvas, targetKB, preferMime='image/webp'
   return { blob: fb, kb: (fb?.size||0)/1024, ext: 'jpg' };
 }
 
+
 // === Document vs Photo compression helpers ===
 function grayscaleInPlace(canvas){
   const ctx = canvas.getContext('2d',{willReadFrequently:true});
@@ -1872,21 +1883,21 @@ function autoDetectDocument(canvas){
 
 })();</script>
 <script>if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) { navigator.serviceWorker.register('./service-worker.js').catch(console.warn); }</script><footer>
-   |
-   |
-
+  <a href="seo.html" class="hidden-seo">SEO Overview</a> |
+  <a href="sitemap.xml" class="hidden-seo">Sitemap</a> |
+  <a href="robots.txt" class="hidden-seo">Robots.txt</a>
 </footer>
 
 <style>
+.hidden-seo {
   position: absolute;
   left: -9999px; /* moves it off-screen */
 }
 </style>
-
-<footer style="font-size:13px; color:var(--muted); text-align:center; margin-top:20px;">
-  <a href="privacy.html" style="margin:0 8px; color:inherit; text-decoration:underline;">Privacy Policy</a> |
-  <a href="terms.html" style="margin:0 8px; color:inherit; text-decoration:underline;">Terms &amp; Conditions</a>
-  <div style="margin-top:8px; font-size:11px; color: #94a3b8;">© 2025 Work Toolkit. All rights reserved.</div>
+<footer style="font-size:10px; color:#ccc; text-align:center; margin-top:20px;">
+  <a href="seo.html" style="margin:0 5px; color:#ccc;">SEO Overview</a> |
+  <a href="sitemap.xml" style="margin:0 5px; color:#ccc;">Sitemap</a> |
+  <a href="robots.txt" style="margin:0 5px; color:#ccc;">Robots.txt</a>
 </footer>
 
 <!-- Assistant-inserted safety helpers to avoid addEventListener on null -->
@@ -1900,14 +1911,7 @@ function autoDetectDocument(canvas){
 </script>
 <!-- end safety helpers -->
 
-<!-- BEGIN: UPI support widget (paste this before 
-<div class="sr-only" aria-hidden="false">
-  <a href="/Work-Toolkit-Pro/sitemap.xml">Sitemap</a>
-  <a href="/Work-Toolkit-Pro/robots.txt">Robots</a>
-  <a href="/Work-Toolkit-Pro/seo.html">SEO Overview</a>
-</div>
-
-</body>) -->
+<!-- BEGIN: UPI support widget (paste this before </body>) -->
 <style>
   /* Floating support button */
   #supportBtn {
